@@ -1,1 +1,9 @@
 /controller/
+/.classpath
+/.project
+/application/
+/databaseOP/
+/images/
+/model/
+/module-info.class
+/view/
