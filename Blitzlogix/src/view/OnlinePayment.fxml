@@ -1,0 +1,17 @@
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="15" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controller.OnlinePaymentController" stylesheets="@Payment.css">
+
+    <Label text="Online Payment" styleClass="header-label"/>
+
+    <TextField fx:id="bankNameField" promptText="Enter Bank Name" styleClass="input-field"/>
+
+    <TextField fx:id="cardNumberField" promptText="Enter Card Number" styleClass="input-field"/>
+
+    <Label fx:id="statusLabel" styleClass="status-label"/>
+
+    <Button text="Confirm Payment" onAction="#handleConfirmPayment" styleClass="action-button"/>
+</VBox>

@@ -1,0 +1,17 @@
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="15" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controller.CashPaymentController" stylesheets="@Payment.css">
+
+    <Label text="Cash Payment" styleClass="header-label"/>
+
+    <!-- ComboBox for Parcel Selection -->
+    <ComboBox fx:id="parcelIdComboBox" promptText="Select Parcel ID" styleClass="input-field"/>
+
+    <!-- Status Label for feedback -->
+    <Label fx:id="statusLabel" styleClass="status-label"/>
+
+    <!-- Confirm Payment Button -->
+    <Button text="Confirm Payment" onAction="#handleConfirmPayment" styleClass="action-button"/>
+</VBox>

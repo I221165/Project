@@ -1,0 +1,38 @@
+.root {
+    -fx-background-color: #f9f9f9;
+}
+
+.label-title {
+    -fx-font-size: 22;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+.label-description {
+    -fx-font-size: 14;
+    -fx-text-fill: #666;
+}
+
+.text-field, .password-field {
+    -fx-font-size: 14;
+    -fx-padding: 10;
+}
+
+.button-primary {
+    -fx-background-color: #2d89ef;
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+    -fx-padding: 8 16;
+}
+
+.button-secondary {
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: #ccc;
+    -fx-font-size: 14;
+    -fx-padding: 8 16;
+}
+
+.footer {
+    -fx-font-size: 10;
+    -fx-text-fill: #aaa;
+}

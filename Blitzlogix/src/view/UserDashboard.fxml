@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<SplitPane dividerPositions="0.2" stylesheets="@UserDashboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UserDashboardController">
+    <!-- Navigation Pane -->
+    <VBox fx:id="navigationPane" spacing="15" alignment="CENTER" styleClass="navigation-pane">
+        <Label text="User Dashboard" styleClass="header-label" />
+        <Button onAction="#handlePayment" text="Payment" styleClass="nav-button" />
+        <Button onAction="#Feedback" text="Feedback" styleClass="nav-button" />
+        <Button onAction="#sendParcels" text="Send Parcels" styleClass="nav-button" />
+                <Button onAction="#DeliverParcel" text="Receive Parcel" styleClass="nav-button" />
+                <Button onAction="#ParcelTracking" text="Parcel Tracking" styleClass="nav-button" />
+        <Button onAction="#logOut" text="Log Out" styleClass="nav-button" />
+        
+        
+    </VBox>
+    
+    <!-- Content Pane -->
+    <StackPane fx:id="userContentPane" alignment="CENTER" styleClass="content-pane">
+        <Label text="Welcome to the User Dashboard. Select an option to get started." styleClass="placeholder-label" />
+    </StackPane>
+</SplitPane>

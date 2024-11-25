@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="15" alignment="CENTER" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="controller.FeedbackController" stylesheets="@Feedback.css">
+    
+    <Label text="Submit Feedback" styleClass="header-label" />
+    
+    <TextField fx:id="parcelIdField" promptText="Enter Parcel ID" styleClass="input-field" />
+    <TextField fx:id="writerIdField" promptText="Enter Writer ID (Sender/Receiver)" styleClass="input-field" />
+    <TextArea fx:id="commentArea" promptText="Enter your feedback here..." styleClass="comment-area" prefRowCount="4" />
+    
+    <!-- Score TextField -->
+    <TextField fx:id="scoreField" promptText="Enter Score (1-10)" styleClass="input-field" />
+    
+    <Button text="Submit Feedback" onAction="#submitFeedback" styleClass="action-button" />
+    <Label fx:id="statusLabel" styleClass="status-label" />
+    
+</VBox>

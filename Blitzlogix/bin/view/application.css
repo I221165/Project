@@ -1,0 +1,43 @@
+.root {
+    -fx-padding: 20;
+    -fx-background-color: #f0f4f8;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+.header-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+    -fx-padding: 10 0 20 0;
+}
+
+.input-field {
+    -fx-pref-width: 250px;
+    -fx-padding: 5px;
+    -fx-border-color: #ced4da;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-background-color: #fff;
+    -fx-font-size: 14px;
+}
+
+.action-button {
+    -fx-pref-width: 100px;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.action-button:hover {
+    -fx-background-color: #0056b3;
+}
+
+.status-label {
+    -fx-text-fill: red;
+    -fx-font-size: 12px;
+    -fx-padding: 10 0 0 0;
+}

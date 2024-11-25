@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="15" alignment="CENTER" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="controller.DeliverParcelCController" stylesheets="@DeliverParcelC.css">
+    
+    <Label text="Deliver Parcel" styleClass="header-label" />
+    <TableView fx:id="parcelTable" prefHeight="400.0" prefWidth="600.0">
+        <columns>
+            <TableColumn fx:id="parcelIdColumn" text="Parcel ID" prefWidth="100.0" />
+            <TableColumn fx:id="senderIdColumn" text="Sender ID" prefWidth="100.0" />
+            <TableColumn fx:id="receiverIdColumn" text="Receiver ID" prefWidth="100.0" />
+            <TableColumn fx:id="weightColumn" text="Weight" prefWidth="100.0" />
+            <TableColumn fx:id="statusColumn" text="Status" prefWidth="200.0" />
+        </columns>
+    </TableView>
+    <Button text="Mark as Delivered" onAction="#markAsDelivered" />
+    <Button text="Accept Parcel" onAction="#acceptParcel" />
+    
+    <Button text="Load Parcels" onAction="#loadParcels" styleClass="action-button" />
+    <Label fx:id="statusLabel" styleClass="status-label" />
+    
+</VBox>

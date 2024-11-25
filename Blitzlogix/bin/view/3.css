@@ -1,0 +1,68 @@
+/* Root container */
+.root {
+    -fx-background-color: #f9f9f9;
+    -fx-padding: 20;
+}
+
+/* Title styling */
+.label-title {
+    -fx-font-size: 24;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+    -fx-padding: 10 0 20 0;
+    -fx-alignment: center;
+}
+
+/* Input field styling */
+.input-field {
+    -fx-font-size: 14;
+    -fx-padding: 10;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+/* Error label styling */
+.error-label {
+    -fx-text-fill: red;
+    -fx-font-size: 12;
+}
+
+/* Primary button styling */
+.button-primary {
+    -fx-background-color: #2d89ef;
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+    -fx-padding: 8 16;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+/* Secondary button styling */
+.button-secondary {
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: #ccc;
+    -fx-text-fill: #333;
+    -fx-font-size: 14;
+    -fx-padding: 8 16;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+/* Button hover effects */
+.button-primary:hover {
+    -fx-background-color: #226bca;
+}
+
+.button-secondary:hover {
+    -fx-background-color: #eaeaea;
+}
+
+/* VBox spacing adjustment for forms */
+.vbox {
+    -fx-spacing: 15;
+}

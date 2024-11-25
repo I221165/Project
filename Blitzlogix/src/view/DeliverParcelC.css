@@ -1,0 +1,44 @@
+/* General Layout */
+.root {
+    -fx-padding: 20;
+    -fx-background-color: #f4f4f9;
+    -fx-spacing: 15;
+    -fx-alignment: center;
+}
+
+/* Header Label */
+.header-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+/* Table Styling */
+.parcel-table {
+    -fx-min-width: 600px;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 10;
+}
+
+/* Buttons */
+.action-button {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #fff;
+    -fx-background-color: #4caf50;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 10 20;
+}
+
+.action-button:hover {
+    -fx-background-color: #45a049;
+}
+
+/* Status Label */
+.status-label {
+    -fx-text-fill: red;
+    -fx-font-size: 14px;
+}
