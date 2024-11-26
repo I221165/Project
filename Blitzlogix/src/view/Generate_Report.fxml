@@ -18,14 +18,14 @@
              <Image url="@../images/2.png" />
           </image>
        </ImageView>
-       <Button layoutX="291.0" layoutY="488.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Confirm" />
-       <TextField alignment="CENTER" layoutX="239.0" layoutY="436.0" prefHeight="25.0" prefWidth="184.0" promptText="ID" />
+       <Button fx:id="confirmButton" layoutX="291.0" layoutY="488.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Confirm" onAction="#generateReport" />
+       <TextField fx:id="idField" alignment="CENTER" layoutX="239.0" layoutY="436.0" prefHeight="25.0" prefWidth="184.0" promptText="ID" />
        <Text fill="#FFFFFF" layoutX="173.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generate Report">
           <font>
              <Font name="Dubai Light" size="48.0" />
           </font>
        </Text>
-       <ChoiceBox fx:id="report_choice" layoutX="239.0" layoutY="395.0" prefHeight="25.0" prefWidth="184.0">
+       <ChoiceBox fx:id="reportChoice" layoutX="239.0" layoutY="395.0" prefHeight="25.0" prefWidth="184.0">
           <items>
              <FXCollections fx:factory="observableArrayList">
                 <String fx:value="Driver" />

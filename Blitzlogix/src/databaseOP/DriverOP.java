@@ -86,15 +86,15 @@ public class DriverOP {
 	
     ////////////////////////////////pickup and dropoff functions///////////////////////////////////
 	
-	public static int removeDriver(int driverID) {
+	public static boolean removeDriver(int driverID) {
 	    Statement st = DatabaseConnection.getStatement();
 	    Connection conn = DatabaseConnection.getConn();
 	    if (statementChecker(st) == 0 || connChecker(conn) == 0) {
-	        return 0; 
+	        return false; 
 	    }
 	    
 	    if(isDriverOutForDelivery(driverID) == true) { // out of town maybe
-			  return 0;
+			  return false;
 		  }
 
 	    try {
@@ -107,7 +107,7 @@ public class DriverOP {
 	        if (rs.next()) {
 	            int count = rs.getInt(1);
 	            if (count > 0) {
-	                return 0; 
+	                return false; 
 	            }
 	        }
 
@@ -117,10 +117,10 @@ public class DriverOP {
 	        deletePs.setInt(1, driverID);
 	        deletePs.executeUpdate();
 
-	        return 1; 
+	        return true; 
 	    } catch (SQLException e) {
 	        System.out.println("Error removing driver: " + e.getMessage());
-	        return 0;
+	        return false;
 	    }
 	}
 	

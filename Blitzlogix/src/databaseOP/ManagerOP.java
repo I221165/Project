@@ -12,11 +12,11 @@ public class ManagerOP {
 	/////////////////////////////////////login verifier////////////////////////////////////
 	
 	
-	public static int verifyManagerLogin(int mid, String password) {
+	public static boolean verifyManagerLogin(int mid, String password) {
 	    Statement st = DatabaseConnection.getStatement();
 	    Connection conn = DatabaseConnection.getConn();
 	    if (statementChecker(st) == 0 || connChecker(conn) == 0) {
-	        return 0; // Indicate failure to connect
+	        return false; // Indicate failure to connect
 	    }
 
 	    try {
@@ -34,7 +34,7 @@ public class ManagerOP {
 	            if (password.equals(storedPassword)) { // This is not secure, see note below
 	                rs.close();
 	                ps.close();
-	                return 1;
+	                return true;
 	            }
 	        }
 	        rs.close();
@@ -43,7 +43,7 @@ public class ManagerOP {
 	        System.out.println("Error verifying manager login: " + e.getMessage());
 	    }
 
-	    return 0;
+	    return false;
 	}
 	
 	
@@ -83,11 +83,11 @@ public class ManagerOP {
 	
 	
 	
-	public static int removeManager(int managerID) {
+	public static boolean removeManager(int managerID) {
 	    Statement st = DatabaseConnection.getStatement();
 	    Connection conn = DatabaseConnection.getConn();
 	    if (statementChecker(st) == 0 || connChecker(conn) == 0) {
-	        return 0;
+	        return false;
 	    }
 
 	    try {
@@ -96,10 +96,10 @@ public class ManagerOP {
 	        deletePs.setInt(1, managerID);
 	        deletePs.executeUpdate();
 
-	        return 1; 
+	        return true; 
 	    } catch (SQLException e) {
 	        System.out.println("Error removing manager: " + e.getMessage());
-	        return 0;
+	        return false;
 	    }
 	}
 	

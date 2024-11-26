@@ -15,8 +15,8 @@
              <Image url="@../images/2.png" />
           </image>
        </ImageView>
-       <Button layoutX="291.0" layoutY="458.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Remove" />
-       <TextField alignment="CENTER" layoutX="239.0" layoutY="408.0" prefHeight="25.0" prefWidth="184.0" promptText="ID" />
+       <Button fx:id="removeButton" layoutX="291.0" layoutY="458.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Remove" onAction="#handleRemove"/>
+       <TextField fx:id="idField" alignment="CENTER" layoutX="239.0" layoutY="408.0" prefHeight="25.0" prefWidth="184.0" promptText="Manager ID" />
        <Text fill="#FFFFFF" layoutX="165.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manager Remove">
           <font>
              <Font name="Dubai Light" size="48.0" />

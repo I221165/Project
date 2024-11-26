@@ -16,8 +16,8 @@
           </image>
        </ImageView>
        <Button layoutX="310.0" layoutY="517.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="80.0" text="Login" />
-       <TextField alignment="CENTER" layoutX="258.0" layoutY="417.0" prefHeight="25.0" prefWidth="184.0" promptText="ID" />
-       <TextField alignment="CENTER" layoutX="258.0" layoutY="467.0" prefHeight="25.0" prefWidth="184.0" promptText="Password" />
+       <TextField fx:id="managerIdField" alignment="CENTER" layoutX="258.0" layoutY="417.0" prefHeight="25.0" prefWidth="184.0" promptText="ID" />
+       <TextField fx:id="passwordField" alignment="CENTER" layoutX="258.0" layoutY="467.0" prefHeight="25.0" prefWidth="184.0" promptText="Password" />
        <Text fill="#FFFFFF" layoutX="207.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manager Login">
           <font>
              <Font name="Dubai Light" size="48.0" />

@@ -15,13 +15,13 @@
              <Image url="@../images/2.png" />
           </image>
        </ImageView>
-       <Button layoutX="310.0" layoutY="576.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Update" />
-       <TextField alignment="CENTER" layoutX="258.0" layoutY="276.0" prefHeight="25.0" prefWidth="184.0" promptText="New Name" />
-       <TextField alignment="CENTER" layoutX="258.0" layoutY="326.0" prefHeight="25.0" prefWidth="184.0" promptText="New Age" />
-       <TextField alignment="CENTER" layoutX="258.0" layoutY="376.0" prefHeight="25.0" prefWidth="184.0" promptText="New Contact Number" />
-       <TextField alignment="CENTER" layoutX="258.0" layoutY="426.0" prefHeight="25.0" prefWidth="184.0" promptText="New Email" />
-       <TextField alignment="CENTER" layoutX="258.0" layoutY="476.0" prefHeight="25.0" prefWidth="184.0" promptText="New CNIC" />
-       <TextField alignment="CENTER" layoutX="258.0" layoutY="526.0" prefHeight="25.0" prefWidth="184.0" promptText="New Password" />
+       <Button fx:id="updateButton" layoutX="310.0" layoutY="576.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Update" onAction="#handleUpdate"/>
+       <TextField fx:id="nameField" alignment="CENTER" layoutX="258.0" layoutY="276.0" prefHeight="25.0" prefWidth="184.0" promptText="New Name"/>
+       <TextField fx:id="ageField" alignment="CENTER" layoutX="258.0" layoutY="326.0" prefHeight="25.0" prefWidth="184.0" promptText="New Age"/>
+       <TextField fx:id="contactField" alignment="CENTER" layoutX="258.0" layoutY="376.0" prefHeight="25.0" prefWidth="184.0" promptText="New Contact Number"/>
+       <TextField fx:id="emailField" alignment="CENTER" layoutX="258.0" layoutY="426.0" prefHeight="25.0" prefWidth="184.0" promptText="New Email"/>
+       <TextField fx:id="cnicField" alignment="CENTER" layoutX="258.0" layoutY="476.0" prefHeight="25.0" prefWidth="184.0" promptText="New CNIC"/>
+       <TextField fx:id="passwordField" alignment="CENTER" layoutX="258.0" layoutY="526.0" prefHeight="25.0" prefWidth="184.0" promptText="New Password"/>
        <Text fill="#FFFFFF" layoutX="181.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Update">
           <font>
              <Font name="Dubai Light" size="48.0" />
