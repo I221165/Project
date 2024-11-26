@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.*;
+import databaseOP.*;
 import java.net.URL;
 
 import javafx.fxml.FXML;
@@ -30,17 +31,18 @@ public class DriverLoginController {
         	showAlert("All fields must be filled out.","Try again.");
             return; 
         }
-        
+        int dID = Integer.parseInt(username);
         // For now, check for basic credentials (you can connect to a database later)
-        if (username.equals("driver") && password.equals("password")) {
+        if (DriverOP.verifyDriverLogin(dID, password)) {
+        	
+        	Session.getInstance().setDriverId(dID); // Set only the current role's ID
             showAlert("Login Successful", "Welcome, Driver!");
-            Session.getInstance().clearSession(); // Clears all previous session data
-        	Session.getInstance().setDriverId("driver"); // Set only the current role's ID
-            
             openDriverDashboard();
         } else {
             showAlert("Login Failed", "Invalid credentials. Please try again.");
         }
+    
+        
     }
 
     private void showAlert(String title, String message) {

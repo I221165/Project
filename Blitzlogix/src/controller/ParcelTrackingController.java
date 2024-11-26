@@ -1,17 +1,17 @@
 package controller;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-
+import java.sql.*;
 import java.time.LocalDateTime;
-import model.*;
+import java.util.ArrayList;
+import java.util.List;
 
+import databaseOP.ParcelOP;
+import model.ParcelTracking;
 
 public class ParcelTrackingController {
 
@@ -19,41 +19,62 @@ public class ParcelTrackingController {
     private TableView<ParcelTracking> trackingTable;
 
     @FXML
-    private TableColumn<ParcelTracking, Integer> eventIdColumn;
-
-    @FXML
-    private TableColumn<ParcelTracking, Integer> parcelIdColumn;
-
-    @FXML
-    private TableColumn<ParcelTracking, String> statusColumn;
-
-    @FXML
-    private TableColumn<ParcelTracking, LocalDateTime> timestampColumn;
-
-    @FXML
     private Button backButton;
 
-    // Sample tracking data
-    private ObservableList<ParcelTracking> trackingData = FXCollections.observableArrayList(
-        new ParcelTracking(1, 101, "Dispatched", LocalDateTime.now().minusDays(3)),
-        new ParcelTracking(2, 101, "In Transit", LocalDateTime.now().minusDays(2)),
-        new ParcelTracking(3, 101, "Delivered", LocalDateTime.now().minusDays(1)),
-        new ParcelTracking(4, 102, "Pending", LocalDateTime.now())
-    );
+    private ObservableList<ParcelTracking> trackingData = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
-        // Initialize columns
-        eventIdColumn.setCellValueFactory(new PropertyValueFactory<>("eventID"));
-        parcelIdColumn.setCellValueFactory(new PropertyValueFactory<>("parcelID"));
-        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+       
+        try {
+            
+           
 
+            ResultSet rs = ParcelOP.getTrackingInfoForCustomer(Session.getInstance().getUserId());
 
-        // Load sample data into the table
-        trackingTable.setItems(trackingData);
+            if (rs != null) {
+                ResultSetMetaData metaData = rs.getMetaData();
+                int columnCount = metaData.getColumnCount();
+
+                
+                for (int i = 1; i <= columnCount; i++) {
+                    String columnName = metaData.getColumnName(i);
+                    TableColumn<ParcelTracking, ?> column = new TableColumn<>(columnName);
+                    
+                   
+                    if (metaData.getColumnType(i) == Types.INTEGER) {
+                        column.setCellValueFactory(new PropertyValueFactory<>(columnName));
+                    } else if (metaData.getColumnType(i) == Types.VARCHAR) {
+                        column.setCellValueFactory(new PropertyValueFactory<>(columnName));
+                    } else if (metaData.getColumnType(i) == Types.TIMESTAMP) {
+                        column.setCellValueFactory(new PropertyValueFactory<>(columnName));
+                    }
+                    trackingTable.getColumns().add(column);
+                }
+
+                // Now fill data into table after creating columns
+                trackingData.clear();
+                while (rs.next()) {
+                    int eventID = rs.getInt("event_id");
+                    int parcelID = rs.getInt("parcel_id");
+                    String status = rs.getString("status");
+                    LocalDateTime timestamp = rs.getTimestamp("timestamp").toLocalDateTime();
+
+                    // Add data to trackingData list
+                    trackingData.add(new ParcelTracking(eventID, parcelID, status, timestamp));
+                }
+
+                // Set the data in the TableView
+                trackingTable.setItems(trackingData);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    // Back button handler
+    
+
     @FXML
     private void handleBackButton() {
         System.out.println("Back button clicked. Return to the previous screen.");

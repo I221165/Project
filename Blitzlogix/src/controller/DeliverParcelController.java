@@ -1,5 +1,9 @@
 package controller;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import databaseOP.DriverOP;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -37,7 +41,13 @@ public class DeliverParcelController {
             {
                 deliverButton.setOnAction(event -> {
                     Parcel parcel = getTableView().getItems().get(getIndex());
+                    
+                    DriverOP.dropOffParcel(Session.getInstance().getDriverId(),parcel.getParcelID());
+                    
                     parcel.setStatus("Delivered"); // Update parcel status
+                    
+                    
+                    
                     parcelTable.refresh(); // Refresh table to reflect changes
                     System.out.println("Parcel " + parcel.getParcelID() + " marked as delivered.");
                 });
@@ -59,9 +69,22 @@ public class DeliverParcelController {
     }
 
     private void loadParcels() {
-        // Simulated parcel data
-        parcelList.add(new Parcel(1, 101, 201, 5, 1001, "In Transit", -1, ""));
-        parcelList.add(new Parcel(2, 102, 202, 10, 1002, "In Transit", -1, ""));
-        parcelList.add(new Parcel(3, 103, 203, 8, 1003, "Delivered", -1, ""));
+    	ResultSet rs = DriverOP.getParcelsToDropOffForDriver(Session.getInstance().getDriverId()); // Example driverID
+
+        try {
+            while (rs.next()) {
+                int parcelID = rs.getInt("parcel_id");
+                String sourceCity = rs.getString("source_city");
+                String destinationCity = rs.getString("destination_city");
+                String status = rs.getString("status");
+
+                Parcel parcel = new Parcel(parcelID, status); // Create Parcel with basic information
+               
+
+                parcelList.add(parcel); // Add the Parcel object to the list
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

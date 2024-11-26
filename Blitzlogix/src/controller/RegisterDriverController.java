@@ -1,5 +1,7 @@
 package controller;
 
+import databaseOP.CustomerOP;
+import databaseOP.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -24,9 +26,12 @@ public class RegisterDriverController {
 
     public void initialize() {
         // Sample list of cities; replace with actual dynamic data if necessary
-        ObservableList<String> cities = FXCollections.observableArrayList(
+        
+    	
+    	ObservableList<String> cities = FXCollections.observableArrayList(
             "New York", "Los Angeles", "Chicago", "San Francisco", "Miami"
         );
+    	
         cityComboBox.setItems(cities);
 
         ObservableList<String> driverTypes = FXCollections.observableArrayList("IntraCity", "InterCity");
@@ -59,8 +64,21 @@ public class RegisterDriverController {
             return;
         }
 
-        // Your logic for registering the driver (e.g., saving data to the database or list)
-        System.out.println("Driver Registered: " + driverName + ", " + email + ", " + cnic + ", " + phone + ", " + driverType + ", " + selectedCity);
+        int ID = CenterOP.getCenterIDByCity(selectedCity);
+        
+if (DriverOP.registerDriver(cnic, driverName, phone, email, password, driverType,ID )) {
+        	
+        	int userId = DriverOP.searchDriver(cnic); // Convert the input to an integer
+        	Session.getInstance().clearSession(); // Clears all previous session data
+        	Session.getInstance().setDriverId(userId); // Set only the current role's ID
+        	System.out.println("Driver Registered");
+        	
+        	driverNameField.setText("");
+        } else {
+        	System.out.println("Driver No registered");
+        }
+        
+        
     }
 
     private boolean isValidCNIC(String cnic) {

@@ -5,7 +5,7 @@
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="controller.ParcelTrackingController" stylesheets="@ParcelTracking.css">
     <children>
-        <VBox spacing="10" prefWidth="600" prefHeight="400" styleClass="root">
+        <VBox spacing="10" prefWidth="1200" prefHeight="700" styleClass="root">
             <!-- Title -->
             <Label text="Parcel Tracking History" styleClass="header-label" />
             

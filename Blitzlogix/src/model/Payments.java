@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 //strategy pattern (different methods)
 
 
+
+//just make it with that parcel id and customer id and let it work
+
 public class Payments {    //infact have to fix this 
 	
 	private PaymentStrategy wayOfPayment;  //cant implement strategy pattern, will need 3 
@@ -17,34 +20,32 @@ public class Payments {    //infact have to fix this
     private String name;
     private Boolean done;
     
+    private String Bank, transactionID, cardNumber; //set these and call the method afterwards with 
+                                                    //strategy name
+    
     //a strategy will be given and we will use it
-    public Payments(double amount, int parcelID, int senderID, String name) {
+    public Payments(int parcelID) {
+    	this.parcelID = parcelID;
+    }
+    
+    
+    public Payments( int parcelID, int senderID,double amount, String name) {
         this.amount = amount;
         this.parcelID = parcelID;
         this.senderID = senderID;
         this.name = name;
         this.done = false;
-        this.wayOfPayment = null; // Set payment strategy to null
-    }
-
-    // Constructor with timestamp
-    public Payments(double amount, int parcelID, int senderID, String name, LocalDateTime timestamp) {
-        this.amount = amount;
-        this.parcelID = parcelID;
-        this.senderID = senderID;
-        this.name = name;
-        this.done = false;
-        this.timestamp = timestamp;
-        this.wayOfPayment = null; // Set payment strategy to null
-    }
+        this.wayOfPayment = null; 
+        timestamp = LocalDateTime.now(); 
+    }    
     
     
-    
-    public void processPayment() { //completing it for the first time
+        //payment created without model, paid with model, just need the name and some details
+    public void processPayment() { //payment already there, just give method to do
     	if(wayOfPayment != null && done == false) {
     		done = true;
-    		timestamp = LocalDateTime.now(); //payment just done
-    		wayOfPayment.recordPayment(done,timestamp);
+    		timestamp = LocalDateTime.now(); 
+    		wayOfPayment.recordPayment(this);
     	}
     }
     
@@ -99,8 +100,39 @@ public class Payments {    //infact have to fix this
 
 
 
-	public void setWayOfPayment(PaymentStrategy wayOfPayment) {
-		this.wayOfPayment = wayOfPayment;
+	public void setWayOfPayment(String method) {
+		PaymentFactory factory = new PaymentFactory();
+		wayOfPayment = factory.getWay(method);
+	}
+
+
+	public String getBank() {
+		return Bank;
+	}
+
+
+	public void setBank(String bank) {
+		Bank = bank;
+	}
+
+
+	public String getTransactionID() {
+		return transactionID;
+	}
+
+
+	public void setTransactionID(String transactionID) {
+		this.transactionID = transactionID;
+	}
+
+
+	public String getCardNumber() {
+		return cardNumber;
+	}
+
+
+	public void setCardNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
 	}
 	
     

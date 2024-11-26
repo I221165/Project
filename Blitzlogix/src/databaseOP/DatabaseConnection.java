@@ -15,7 +15,7 @@ public class DatabaseConnection {
 	private DatabaseConnection() {
 		try {
 			Class.forName("org.postgresql.Driver");
-			conn= DriverManager.getConnection("jdbc:postgresql://localhost:5432/Project","postgres","1234");
+			conn= DriverManager.getConnection("jdbc:postgresql://localhost:5432/Project","postgres","0312");
 			st = conn.createStatement();
 			System.out.println("Database connected"); //load data into arrays
 		} catch(ClassNotFoundException c) {

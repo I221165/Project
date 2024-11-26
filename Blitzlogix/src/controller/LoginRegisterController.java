@@ -1,6 +1,9 @@
 package controller;
 
 import javafx.fxml.FXML;
+
+import databaseOP.*;
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -20,8 +23,10 @@ public class LoginRegisterController {
     @FXML private TextField cnicField; // Added CNIC field
     @FXML private TextField phoneNumberField; // Added Phone Number field
     @FXML private Label statusLabel;
+    
+    String UID;
 
-    private CustomerService customerService = new CustomerService();
+  //  private CustomerService customerService = new CustomerService();
 
     @FXML
     private void handleRegister() {
@@ -46,23 +51,20 @@ public class LoginRegisterController {
             return;
         }
 
-        UserDetails userDetails = new UserDetails(); 
-        userDetails.setCNIC(cnic);
-        userDetails.setEmail(email);
-        userDetails.setName(username);
-        userDetails.setPhone(phoneNumber);
-        Customer newCustomer = new Customer();
-        newCustomer.setPassword(password);
-        newCustomer.setDetails(userDetails);
-
-        if (customerService.registerCustomer(newCustomer)) {
+     
+        
+        if (CustomerOP.registerCustomer(cnic, username, phoneNumber, email, password)) {
+        	
+        	int userId = CustomerOP.searchCustomer(cnic); // Convert the input to an integer
+        	Session.getInstance().clearSession(); // Clears all previous session data
+        	Session.getInstance().setUserId(userId); // Set only the current role's ID
             showAlert("Registration Successful", "You can now log in.");
             statusLabel.setText("");
         } else {
             statusLabel.setText("Registration failed. Try a different username or email.");
         }
     }
-
+    
     private boolean isValidCNIC(String cnic) {
         return cnic.matches("\\d{13}"); // Validates 13-digit CNIC
     }
@@ -78,26 +80,23 @@ public class LoginRegisterController {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
+        
+        
         if (username.isEmpty() || password.isEmpty()) {
             statusLabel.setText("Please enter both username and password.");
             return;
         }
-
-//        if (customerService.loginCustomer(username, password)) {
-//            showAlert("Login Successful", "Welcome " + username);
-//            statusLabel.setText("");
-//            openUserDashboard();
-//        } else {
-//            statusLabel.setText("Login failed. Invalid credentials.");
-//        }
-        if (username.equals("hh") && password.equals("hh")) 
-        {
-        	statusLabel.setText("");
-        	Session.getInstance().clearSession(); // Clears all previous session data
-        	Session.getInstance().setUserId("user"); // Set only the current role's ID
-
+       
+        int userId = Integer.parseInt(username); // Convert the input to an integer
+       if (CustomerOP.verifyLogin(userId,password )) {
+    	   Session.getInstance().setDriverId(userId); 
+            showAlert("Login Successful", "Welcome " + username);
+            statusLabel.setText("");
             openUserDashboard();
+        } else {
+            statusLabel.setText("Login failed. Invalid credentials.");
         }
+        
         
     }
 

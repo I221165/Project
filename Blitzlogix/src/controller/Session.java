@@ -2,9 +2,10 @@ package controller;
 
 public class Session {
     private static Session instance;
-    private String userId;
-    private String driverId;
-    private String adminId;
+    private int userId;
+    private int driverId;
+    private int adminId;
+    private int parcelID;
 
     private Session() {
         // Private constructor
@@ -18,19 +19,23 @@ public class Session {
     }
 
     // Getters and Setters
-    public String getUserId() { return userId; }
-    public void setUserId(String userId) { this.userId = userId; }
+    public int getUserId() { return userId; }
+    public void setUserId(int userId2) { this.userId = userId2; }
 
-    public String getDriverId() { return driverId; }
-    public void setDriverId(String driverId) { this.driverId = driverId; }
+    public int getDriverId() { return driverId; }
+    public void setDriverId(int driverId) { this.driverId = driverId; }
 
-    public String getAdminId() { return adminId; }
-    public void setAdminId(String adminId) { this.adminId = adminId; }
+    public int getAdminId() { return adminId; }
+    public void setAdminId(int adminId) { this.adminId = adminId; }
 
+    public int getParcelID() { return parcelID; }
+    public void setParcelID(int parcelID) { this.parcelID = parcelID; }
+    
     // Clear all session data
     public void clearSession() {
-        this.userId = null;
-        this.driverId = null;
-        this.adminId = null;
+        this.userId = 0;
+        this.driverId = 0;
+        this.adminId = 0;
+        parcelID = 0;
     }
 }

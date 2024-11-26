@@ -8,12 +8,6 @@ public class Driver {
 	private String Dtype; //  use the enum class DriverType here
 	public UserDetails details;
 	private int parcelsDelivered; //total
-	
-	
-	//these two for intercity drivers
-	private int homeCenter; //at the time of creation, so if current center is not home,
-	//he can only be assigned back to home center
-	
     private int currentCenterID; //first assigned to a center 
     
     
@@ -31,7 +25,7 @@ public class Driver {
 	
 	
 	ArrayList<Parcel> parcelIDs;
-
+    //to be or not to be 
 
 	
 	public int getDID() {
@@ -64,14 +58,6 @@ public class Driver {
 	public void setCurrentCenterID(int centerID) {
 		this.currentCenterID = centerID;
 	}
-	public int getHomeCenter() {
-		return homeCenter;
-	}
-	public void setHomeCenter(int homeCenter) {
-		this.homeCenter = homeCenter;
-	} 
-	
-	
 	
 	
 	

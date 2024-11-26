@@ -2,6 +2,7 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import model.Payments;
 import javafx.scene.control.Label;
 
 public class OnlinePaymentController {
@@ -15,31 +16,22 @@ public class OnlinePaymentController {
     @FXML
     private Label statusLabel;
 
-    
-    String adminId = Session.getInstance().getAdminId();
-    String driverId = Session.getInstance().getDriverId();
-    String UId = Session.getInstance().getUserId();
-    
-    @FXML
-    public void initialize() {
-    	
-    }
-    
     @FXML
     public void handleConfirmPayment() {
         String bankName = bankNameField.getText();
-        String cardNumber = cardNumberField.getText();
+        String trans = cardNumberField.getText();
 
-        if (bankName.isEmpty() || cardNumber.isEmpty()) {
+        if (bankName.isEmpty() || trans.isEmpty()) {
             statusLabel.setText("All fields are required.");
-
-            System.out.println("Admin ID: " + adminId);
-            System.out.println("D ID: " + driverId);
-            System.out.println("u ID: " + UId);
-            
             return;
         }
-
+        Payments p = new Payments(Session.getInstance().getParcelID());
+        p.setName("CardPayment");
+        p.setBank(bankName);
+        p.setTransactionID(trans);
+        
+        
+        p.processPayment();
         statusLabel.setText("Online payment successful!");
     }
 }

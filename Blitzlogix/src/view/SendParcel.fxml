@@ -25,7 +25,7 @@
     <!-- Weight -->
     <Label styleClass="form-label" text="Weight (kg):" />
     <TextField fx:id="weightField" promptText="Enter Parcel Weight" styleClass="input-field" />
-
+<TextField fx:id="weightField1" promptText="Enter Receiver ID" styleClass="input-field" />
     <!-- Send Parcel Button -->
     <Button onAction="#handleSendParcel" styleClass="action-button" text="Send Parcel" />
     <Label fx:id="statusLabel" text="" styleClass="status-label" />

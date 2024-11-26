@@ -1,5 +1,6 @@
 package controller;
 import model.*;
+import databaseOP.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
@@ -12,8 +13,8 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
-
-public class AdminLoginController {
+import databaseOP.*
+;public class AdminLoginController {
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private Label statusLabel;
@@ -48,18 +49,17 @@ public class AdminLoginController {
         Admin admin = new Admin();
        // admin.setDetails(userDetails);
         admin.setPassword(password);
-
-//        if (adminService.loginAdmin(admin)) {
-//            openAdminDashboard();
-//        } else {
-//            statusLabel.setText("Invalid login credentials.");
-//        }
-        
-        if(username.equals("11") && password.equals("11"))
-        {
-        	Session.getInstance().clearSession(); // Clears all previous session data
-        	Session.getInstance().setAdminId("admin123"); // Set only the current role's ID
-        	openAdminDashboard();
+        int adID = Integer.parseInt(username);
+        if (AdminOP.verifyAdminLogin(adID, password)) {
+        	Session.getInstance().clearSession();
+Session.getInstance().setAdminId(adID);
+            openAdminDashboard();
+       } else {
+            statusLabel.setText("Invalid login credentials.");
         }
+        
+        
+       
+        
     }
 }

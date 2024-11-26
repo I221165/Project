@@ -14,9 +14,11 @@ public class Admin {
      
      
 	public Admin() {
+		AID = 0;
+    	password = "";
+    	details = null;
 		// TODO Auto-generated constructor stub
 	}
-
 
 
 

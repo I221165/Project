@@ -6,18 +6,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox spacing="20" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+<HBox spacing="20" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="controller.PickUpParcelController">
 
     <!-- Main Content Area -->
-    <VBox prefWidth="500" spacing="20">
+    <VBox prefWidth="750" spacing="20">
         
         <!-- Table for displaying parcels -->
-        <TableView fx:id="parcelTable" prefWidth="400">
+        <TableView fx:id="parcelTable" prefWidth="700">
             <columns>
-                <TableColumn fx:id="parcelIdColumn" text="Parcel ID" prefWidth="150"/>
-                <TableColumn fx:id="statusColumn" text="Status" prefWidth="150"/>
-                <TableColumn fx:id="actionColumn" text="Action" prefWidth="150"/>
+                <TableColumn fx:id="parcelIdColumn" text="Parcel ID" prefWidth="200"/>
+                <TableColumn fx:id="statusColumn" text="Status" prefWidth="200"/>
+                <TableColumn fx:id="actionColumn" text="Action" prefWidth="300"/>
             </columns>
         </TableView>
     </VBox>

@@ -11,6 +11,10 @@ public class UserDetails {
 		this.email = Email;
 	}
 	   public UserDetails() {
+		   this.CNIC="";
+		   this.name="";
+		   this.phone="";
+		   this.email="";
 		// TODO Auto-generated constructor stub
 	}
 	//CNIC to match the details

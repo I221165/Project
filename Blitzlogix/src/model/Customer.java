@@ -20,6 +20,11 @@ public class Customer {
 	
 	
 	public Customer() {
+		CID = 0;
+		password = "";
+		details = null;
+		moneySpent = 0;
+		totalParcels = 0;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -61,14 +66,11 @@ public class Customer {
 	}
 
 
-	public void setDetails(UserDetails userDetails) {
-		// TODO Auto-generated method stub
-		this.details = userDetails;
-	}
-
+	
 
 	public UserDetails getDetails() {
 		// TODO Auto-generated method stub
+		
 		return this.details;
 	}
 }

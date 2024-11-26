@@ -1,10 +1,11 @@
 package controller;
-
+import model.*;
+import databaseOP.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 
-public class CashPaymentController {
+;public class CashPaymentController {
 
     @FXML
     private ComboBox<String> parcelIdComboBox; // ComboBox for parcel selection
@@ -30,8 +31,11 @@ public class CashPaymentController {
             return;
         }
 
-        // Process payment confirmation for the selected parcel
-        String selectedParcel = parcelIdComboBox.getValue();
-        statusLabel.setText("Payment successful for " + selectedParcel + "!");
+        Payments p = new Payments(Session.getInstance().getParcelID());
+        p.setName("CashPayment");
+        
+        p.processPayment();
+        
+        
     }
 }

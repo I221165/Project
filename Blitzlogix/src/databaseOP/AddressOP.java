@@ -124,4 +124,62 @@ public class AddressOP {
             return 0; 
         }
     }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	////////for coupling parcels together
+	
+	public static String getCityFromAddressID(int addressID) {
+	    Statement st = DatabaseConnection.getStatement();
+	    Connection conn = DatabaseConnection.getConn();
+	    if (statementChecker(st) == 0 || connChecker(conn) == 0) {
+	        return null;
+	    }
+	    
+	    if(addressExists(addressID) == 0) {
+	    	return "Address Doesn't exists";
+	    }
+
+	    try {
+	        String selectQuery = "SELECT city FROM Address WHERE id = ?";
+	        PreparedStatement ps = conn.prepareStatement(selectQuery);
+	        ps.setInt(1, addressID);
+	        ResultSet rs = ps.executeQuery();
+
+	        if (rs.next()) {
+	            String city = rs.getString(1);
+	            rs.close();
+	            ps.close();
+	            return city;
+	        } else {
+	            rs.close();
+	            ps.close();
+	            return "Error"; // Address not found
+	        }
+	    } catch (SQLException e) {
+	        System.out.println("Error fetching city: " + e.getMessage());
+	        return "Error"; // Error occurred
+	    }
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

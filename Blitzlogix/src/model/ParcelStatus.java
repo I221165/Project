@@ -5,10 +5,13 @@ public enum ParcelStatus {
     ASSIGNED_TO_DRIVER,
     PICKED_FROM_SENDER,     //rn in its source city, can tell source city center address(destination) and source home(source)
     DROPPED_AT_LOCALCENTER, //now i know that address too
+    ASSIGNED_TRANSIT, //newone
     IN_TRANSIT,
     AT_DESTINATION_CENTER,             //from source city to destination city center, have both address
+    ASSIGNED_DELIVERY,
     OUT_FOR_DELIVERY,       //from destination city center to destination home (have both addresses)
-    DELIVERED          //end, wont be updated now
+    DELIVERED,          //end, wont be updated now
+    FINISHED
 }
 
 

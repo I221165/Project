@@ -32,6 +32,11 @@ public class Feedback {
      
      
      public Feedback() {
+    	 this.parcelID = 0;
+         this.writerID = 0;
+         this.score = 0;
+         this.comment = "";
+         this.timestamp = null;
 		// TODO Auto-generated constructor stub
 	}
 

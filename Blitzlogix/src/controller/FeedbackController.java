@@ -4,8 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.*;
 import java.time.LocalDateTime;
-
-public class FeedbackController {
+import databaseOP.*
+;public class FeedbackController {
 
     @FXML
     private TextField parcelIdField;
@@ -32,8 +32,6 @@ public class FeedbackController {
         // Validate Inputs
         if (parcelIdText.isEmpty() || writerIdText.isEmpty() || comment.isEmpty() || scoreText.isEmpty()) {
             statusLabel.setText("All fields are required.");
-            
-
             return;
         }
 
@@ -65,10 +63,12 @@ public class FeedbackController {
         feedback.setTimestamp(LocalDateTime.now());
 
         // Process Feedback (Simulate saving feedback)
-        if (saveFeedback(feedback)) {
+        if (FeedbackOP.createFeedback(parcelId, writerId, comment, score)) {
             statusLabel.setText("Feedback submitted successfully!");
             statusLabel.setStyle("-fx-text-fill: green;");
 
+            
+            
             parcelIdField.clear();
             writerIdField.clear();
             commentArea.clear();
@@ -78,10 +78,5 @@ public class FeedbackController {
         }
     }
 
-    // Simulated database save operation
-    private boolean saveFeedback(Feedback feedback) {
-        System.out.println("Feedback Saved: " + feedback);
-        // Add logic to save feedback to a database or file.
-        return true; // Simulate success
-    }
+    
 }
