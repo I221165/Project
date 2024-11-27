@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="15" stylesheets="@SendParcel.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SendParcelController">
+
+    <!-- Header -->
+    <Label styleClass="header-label" text="Send Parcel" />
+
+    <!-- Sender Address -->
+    <Label styleClass="form-label" text="Sender Address:" />
+    <TextField fx:id="senderCityField" promptText="Enter City" styleClass="input-field" />
+    <TextField fx:id="senderNeighbourhoodField" promptText="Enter Neighbourhood" styleClass="input-field" />
+    <TextField fx:id="senderStreetNumberField" promptText="Enter Street Number" styleClass="input-field" />
+    <TextField fx:id="senderHouseNumberField" promptText="Enter House Number" styleClass="input-field" />
+
+    <!-- Recipient Address -->
+    <Label styleClass="form-label" text="Recipient Address:" />
+    <TextField fx:id="recipientCityField" promptText="Enter City" styleClass="input-field" />
+    <TextField fx:id="recipientNeighbourhoodField" promptText="Enter Neighbourhood" styleClass="input-field" />
+    <TextField fx:id="recipientStreetNumberField" promptText="Enter Street Number" styleClass="input-field" />
+    <TextField fx:id="recipientHouseNumberField" promptText="Enter House Number" styleClass="input-field" />
+
+    <!-- Weight -->
+    <Label styleClass="form-label" text="Weight (kg):" />
+    <TextField fx:id="weightField" promptText="Enter Parcel Weight" styleClass="input-field" />
+<TextField fx:id="weightField1" promptText="Enter Receiver ID" styleClass="input-field" />
+    <!-- Send Parcel Button -->
+    <Button onAction="#handleSendParcel" styleClass="action-button" text="Send Parcel" />
+    <Label fx:id="statusLabel" text="" styleClass="status-label" />
+</VBox>

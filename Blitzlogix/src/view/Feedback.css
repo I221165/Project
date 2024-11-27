@@ -1,0 +1,50 @@
+/* General Layout */
+.root {
+    -fx-padding: 20;
+    -fx-background-color: #f4f4f9;
+    -fx-spacing: 15;
+    -fx-alignment: center;
+}
+
+/* Header Label */
+.header-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+/* Input Fields */
+.input-field, .comment-area {
+    -fx-font-size: 14px;
+    -fx-padding: 10;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-border-color: #ccc;
+    -fx-background-color: #fff;
+    -fx-min-width: 300px;
+}
+
+.comment-area {
+    -fx-min-height: 100px;
+}
+
+/* Buttons */
+.action-button {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #fff;
+    -fx-background-color: #4caf50;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 10 20;
+}
+
+.action-button:hover {
+    -fx-background-color: #45a049;
+}
+
+/* Status Label */
+.status-label {
+    -fx-text-fill: red;
+    -fx-font-size: 14px;
+}

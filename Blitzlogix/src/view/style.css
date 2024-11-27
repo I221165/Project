@@ -1,0 +1,49 @@
+/* General Background Styling */
+.root {
+    -fx-background-color: transparent; /* Transparent as the image is the background */
+}
+
+/* Background Image Styling */
+.image-view {
+    -fx-opacity: 0.7; /* Slight transparency for a softer background effect */
+}
+
+/* Header Text Styling */
+.header-text {
+    -fx-font-size: 24px;
+    -fx-font-family: "Georgia";
+    -fx-fill: white;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 10, 0.5, 2, 2);
+}
+
+/* Buttons */
+.menu-button {
+    -fx-font-size: 16px;
+    -fx-font-family: "Arial Black";
+    -fx-text-fill: white;
+    -fx-background-color: #0078d7; /* Light blue */
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #0053a0;
+    -fx-border-width: 2;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0.5, 0, 1);
+}
+
+.menu-button:hover {
+    -fx-background-color: #0053a0; /* Darker blue on hover */
+    -fx-border-color: #00386b;
+}
+
+.menu-button:pressed {
+    -fx-background-color: #00386b;
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0.5, 1, 1);
+}
+
+/* VBox Styling */
+.vbox {
+    -fx-alignment: center;
+    -fx-spacing: 20;
+}

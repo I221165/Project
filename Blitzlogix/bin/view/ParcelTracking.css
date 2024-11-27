@@ -1,0 +1,32 @@
+.root {
+    -fx-padding: 20;
+    -fx-background-color: #f9f9f9;
+    -fx-alignment: center;
+}
+
+.header-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+    -fx-padding: 10 0 20 0;
+}
+
+.table-view {
+    -fx-border-color: #ccc;
+    -fx-border-width: 1;
+    -fx-background-color: white;
+    -fx-padding: 5;
+}
+
+.button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-padding: 10 20;
+    -fx-font-size: 14px;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.button:hover {
+    -fx-background-color: #45a049;
+}

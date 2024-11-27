@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Manage_Parcel_Intra_Controller">
+    <children>
+       <ImageView fitHeight="700" fitWidth="1000" layoutX="1.0" pickOnBounds="true" preserveRatio="false">
+          <image>
+             <Image url="@../images/2.png" />
+          </image>
+       </ImageView>
+       <ScrollPane layoutX="20.0" layoutY="226.0" prefHeight="350" prefWidth="300">
+          <TableView fx:id="table1" layoutX="20.0" layoutY="226.0" prefHeight="350" prefWidth="300" onMouseClicked="#onDriverRowClick">
+             <columns>
+                <TableColumn text="DID">
+                   <prefWidth>100.0</prefWidth>
+                </TableColumn>
+                <TableColumn text="Name">
+                   <prefWidth>100.0</prefWidth>
+                </TableColumn>
+                <TableColumn text="Driver Type">
+                   <prefWidth>100.0</prefWidth>
+                </TableColumn>
+             </columns>
+          </TableView>
+       </ScrollPane>
+       <ScrollPane layoutX="380.0" layoutY="226.0" prefHeight="350" prefWidth="600">
+          <TableView fx:id="table2" layoutX="380.0" layoutY="226.0" prefHeight="350" prefWidth="600" onMouseClicked="#onParcelRowClick">
+             <columns>
+                <TableColumn text="Parcel ID">
+                   <prefWidth>100.0</prefWidth>
+                </TableColumn>
+                <TableColumn text="Sender Name">
+                   <prefWidth>100.0</prefWidth>
+                </TableColumn>
+                <TableColumn text="Source City">
+                   <prefWidth>100.0</prefWidth>
+                </TableColumn>
+                <TableColumn text="Receiver Name">
+                   <prefWidth>100.0</prefWidth>
+                </TableColumn>
+                <TableColumn text="Destination City">
+                   <prefWidth>100.0</prefWidth>
+                </TableColumn>
+                <TableColumn text="Status">
+                   <prefWidth>100.0</prefWidth>
+                </TableColumn>
+             </columns>
+          </TableView>
+       </ScrollPane>
+       <Button fx:id="assignButton" layoutX="570.0" layoutY="631.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Assign" onAction="#onAssignButtonClick" />
+       <Text fill="#FFFFFF" layoutX="470.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Parcel">
+          <font>
+             <Font name="Dubai Light" size="48.0" />
+          </font>
+       </Text>
+    </children>
+</AnchorPane>

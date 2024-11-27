@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DeliverParcelController">
+    <TableView fx:id="parcelTable" prefHeight="400.0" prefWidth="600.0">
+        <columns>
+            <TableColumn fx:id="parcelIdColumn" text="Parcel ID" prefWidth="150.0" />
+            <TableColumn fx:id="statusColumn" text="Status" prefWidth="300.0" />
+            <TableColumn fx:id="actionColumn" text="Action" prefWidth="150.0" />
+        </columns>
+    </TableView>
+</VBox>

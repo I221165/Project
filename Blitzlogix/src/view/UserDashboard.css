@@ -1,0 +1,60 @@
+/* General Root Styling */
+.root {
+    -fx-background-color: #f9f9f9;
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-size: 14px;
+}
+
+/* Navigation Pane Styling */
+.navigation-pane {
+    -fx-background-color: #2c3e50;
+    -fx-padding: 15;
+    -fx-spacing: 20;
+    -fx-alignment: center;
+}
+
+/* Header Label Styling */
+.header-label {
+    -fx-text-fill: #ecf0f1;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-padding: 10;
+}
+
+/* Navigation Button Styling */
+.nav-button {
+    -fx-background-color: #34495e;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 10 20;
+    -fx-pref-width: 160px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 4, 0, 2, 2);
+}
+
+.nav-button:hover {
+    -fx-background-color: #3c6382;
+    -fx-text-fill: #ecf0f1;
+}
+
+.nav-button:pressed {
+    -fx-background-color: #1e272e;
+    -fx-text-fill: #dcdde1;
+}
+
+/* Content Pane Styling */
+.content-pane {
+    -fx-background-color: #ecf0f1;
+    -fx-padding: 20;
+    -fx-alignment: center;
+}
+
+/* Placeholder Label Styling */
+.placeholder-label {
+    -fx-text-fill: #7f8c8d;
+    -fx-font-size: 16px;
+    -fx-opacity: 0.8;
+}

@@ -1,0 +1,39 @@
+/* Root container styling */
+.root {
+    -fx-background-color: #f4f4f4;
+    -fx-padding: 20;
+    -fx-spacing: 15;
+}
+
+/* Input field styling */
+.input-field {
+    -fx-font-size: 14;
+    -fx-padding: 10;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #d1d1d1;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 1);
+    -fx-prompt-text-fill: #999999;
+}
+
+/* Button styling */
+.button-primary {
+    -fx-background-color: #0078d7;
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+    -fx-padding: 10;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+/* Button hover effect */
+.button-primary:hover {
+    -fx-background-color: #005ea6;
+}
+
+/* VBox spacing for better alignment */
+.vbox {
+    -fx-spacing: 15;
+}
