@@ -26,6 +26,9 @@ public class Payments {    //infact have to fix this
     //a strategy will be given and we will use it
     public Payments(int parcelID) {
     	this.parcelID = parcelID;
+        this.done = false;
+        this.wayOfPayment = null; 
+        timestamp = LocalDateTime.now(); 
     }
     
     

@@ -15,6 +15,7 @@
         <!-- Table for displaying parcels -->
         <TableView fx:id="parcelTable" prefWidth="700">
             <columns>
+            
                 <TableColumn fx:id="parcelIdColumn" text="Parcel ID" prefWidth="200"/>
                 <TableColumn fx:id="statusColumn" text="Status" prefWidth="200"/>
                 <TableColumn fx:id="actionColumn" text="Action" prefWidth="300"/>

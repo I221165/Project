@@ -29,7 +29,7 @@ public class RegisterDriverController {
         
     	
     	ObservableList<String> cities = FXCollections.observableArrayList(
-            "New York", "Los Angeles", "Chicago", "San Francisco", "Miami"
+            "Karachi", "Peshawar", "Islamabad", "Lahore"
         );
     	
         cityComboBox.setItems(cities);
@@ -69,7 +69,7 @@ public class RegisterDriverController {
 if (DriverOP.registerDriver(cnic, driverName, phone, email, password, driverType,ID )) {
         	
         	int userId = DriverOP.searchDriver(cnic); // Convert the input to an integer
-        	Session.getInstance().clearSession(); // Clears all previous session data
+        	//Session.getInstance().clearSession(); // Clears all previous session data
         	Session.getInstance().setDriverId(userId); // Set only the current role's ID
         	System.out.println("Driver Registered");
         	

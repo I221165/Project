@@ -120,5 +120,14 @@ public class Parcel {
 
 	    }
 		
+	    
+
+	        public int getParcelId() {
+	            return parcelID;
+	        }
+
+	       
+	    
+
 		
 }

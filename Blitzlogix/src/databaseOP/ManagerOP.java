@@ -236,129 +236,162 @@ public class ManagerOP {
 	
 	
 	
-	////////////////////////////////now intercity parcels to assign/////////////////////////////
-	
-	
-	public static ResultSet getIntercityParcelsForManager(int mid){
-	    Statement st = DatabaseConnection.getStatement();
-	    Connection conn = DatabaseConnection.getConn();
+////////////////////////////////now intercity parcels to assign/////////////////////////////
 
-	    if (statementChecker(st) == 0 || connChecker(conn) == 0) {
-	        return null;
-	    }
-
-	    try {
-	        int centerID = getCenterIDForManager(mid);
-	        if (centerID == 0) {
-	            return null; // Manager not found
-	        }
-
-	        String centerCity = CenterOP.getCenterCity(centerID);
-	        if (centerCity == null) {
-	            return null; // Error fetching center city
-	        }
-
-	        String selectQuery = "SELECT p.parcel_id, u1.name AS sender_name, a1.city AS source_city, " +
-	                             "u2.name AS receiver_name, a2.city AS destination_city, p.status " +
-	                             "FROM Parcel p " +
-	                             "JOIN Customer c1 ON p.sender_id = c1.CID " +
-	                             "JOIN UserDetails u1 ON c1.CNIC = u1.CNIC " +
-	                             "JOIN Address a1 ON c1.address_id = a1.id " +
-	                             "JOIN Customer c2 ON p.receiver_id = c2.CID " +
-	                             "JOIN UserDetails u2 ON c2.CNIC = u2.CNIC " +
-	                             "JOIN Address a2 ON c2.address_id = a2.id " +
-	                             "WHERE p.status = 'DROPPED_AT_LOCALCENTER' " +
-	                             "AND p.holder_id = ? " +
-	                             "AND (SELECT city FROM Address WHERE id = (SELECT destination_id FROM Route WHERE route_id = p.route_id)) <> ?";
-
-	        PreparedStatement ps = conn.prepareStatement(selectQuery);
-	        ps.setInt(1, centerID);
-	        ps.setString(2, centerCity);
-	        ResultSet rs = ps.executeQuery();
-
-	        return rs;
-	    } catch (SQLException e) {
-	        System.out.println("Error fetching parcel records for manager: " + e.getMessage());
-	       
-	    } 
-	    
-	    return null;
-	}
-	
-	
-	
-	
-	
-	
-	
 	
 
-	////////////////////////////////now intracity parcels to assign/////////////////////////////
 	
-	
-	public static ResultSet getIntracityParcelsForManager(int mid){
-		  Statement st = DatabaseConnection.getStatement();
-		  Connection conn = DatabaseConnection.getConn();
-		  if (statementChecker(st) == 0 || connChecker(conn) == 0) {
-		    return null;
-		  }
 
-		  try {
-			  
-		    int centerID = getCenterIDForManager(mid);
-		    if (centerID == 0) {
-		      return null; 
-		    }
+public static ResultSet getIntercityParcelsForManager(int mid) {
 
-		    
-		    String centerCity = CenterOP.getCenterCity(centerID);
-		    if (centerCity == null) {
-		      return null;
-		    }
-		    
-		    
-		    ////////for within city deliveries
-		    
-		    String updateQuery = "UPDATE Parcel SET status = 'AT_DESTINATION_CENTER' " +
-                    "WHERE status = 'DROPPED_AT_LOCALCENTER' " +
-                    "AND (SELECT city FROM Address WHERE id = (SELECT destination_id FROM Route WHERE route_id = Parcel.route_id)) = ?";
-            PreparedStatement updatePs = conn.prepareStatement(updateQuery);
-            updatePs.setString(1, centerCity);
-            int updatedRows =updatePs.executeUpdate();
-            
-            ArrayList<Integer> updatedParcelIDs = new ArrayList<>();
-            if (updatedRows > 0) {
-                ResultSet updatedParcels = updatePs.getGeneratedKeys();
-                while (updatedParcels.next()) {
-                    updatedParcelIDs.add(updatedParcels.getInt(1));
-                }
-            }
-            
-            
+Statement st = DatabaseConnection.getStatement();
 
-		    ////////////////////////////////////////////////////
+Connection conn = DatabaseConnection.getConn();
 
-		    String selectQuery = "SELECT p.parcel_id, u1.name AS sender_name, a1.city AS source_city, " +
-		                          "u2.name AS receiver_name, a2.city AS destination_city, p.status " +
-		                          "FROM Parcel p " +
-		                          "JOIN Customer c1 ON p.sender_id = c1.CID " +
-		                          "JOIN UserDetails u1 ON c1.CNIC = u1.CNIC " +
-		                          "JOIN Address a1 ON c1.address_id = a1.id " +
-		                          "JOIN Customer c2 ON p.receiver_id = c2.CID " +
-		                          "JOIN UserDetails u2 ON c2.CNIC = u2.CNIC " +
-		                          "JOIN Address a2 ON c2.address_id = a2.id " +
-		                          "WHERE (p.status = 'REQUEST_INITIATED' OR p.status = 'AT_DESTINATION_CENTER') "+
-		                          "AND (SELECT city FROM Address WHERE id = (SELECT destination_address_id FROM Route WHERE route_id = Parcel.route_id)) = ?";
-		    PreparedStatement ps = conn.prepareStatement(selectQuery);
-		    ps.setString(1, centerCity);
-		    ResultSet rs = ps.executeQuery();
 
-		    return rs;
-		  } catch (SQLException e) {
-		    System.out.println("Error fetching parcel records for manager: " + e.getMessage());
-		    return null;
-		  }
-		}
+
+if (statementChecker(st) == 0 || connChecker(conn) == 0) {
+
+return null;
+
+}
+
+
+
+try {
+
+// Fetch the center ID for the given manager ID
+
+int centerID = getCenterIDForManager(mid);
+
+if (centerID == 0) {
+
+return null; // Manager not found
+
+}
+
+
+
+// Query to fetch intercity parcels assigned to the manager's center
+
+String selectQuery = "SELECT p.parcel_id, " +
+
+     "u1.name AS sender_name, " +
+
+     "a1.city AS source_city, " +
+
+     "u2.name AS receiver_name, " +
+
+     "a2.city AS destination_city, " +
+
+     "p.status " +
+
+     "FROM Parcel p " +
+
+     "JOIN Customer c1 ON p.sender_id = c1.CID " +
+
+     "JOIN UserDetails u1 ON c1.CNIC = u1.CNIC " +
+
+     "JOIN Route r ON p.route_id = r.route_id " +
+
+     "JOIN Address a1 ON r.source_id = a1.id " +
+
+     "JOIN Customer c2 ON p.receiver_id = c2.CID " +
+
+     "JOIN UserDetails u2 ON c2.CNIC = u2.CNIC " +
+
+     "JOIN Address a2 ON r.destination_id = a2.id " +
+
+     "WHERE p.status = 'DROPPED_AT_LOCALCENTER' " +
+
+     "AND p.holder = 'CENTER' " +
+
+     "AND p.holder_id = ?";
+
+
+
+PreparedStatement ps = conn.prepareStatement(selectQuery);
+
+ps.setInt(1, centerID);
+
+
+
+// Execute the query and return the result set
+
+return ps.executeQuery();
+
+} catch (SQLException e) {
+
+System.out.println("Error fetching parcel records for manager: " + e.getMessage());
+
+return null;
+
+}
+
+}
+
+
+
+////////////////////////////////now intracity parcels to assign/////////////////////////////
+
+
+
+
+
+public static ResultSet getIntracityParcelsForManager(int mid) {
+    Statement st = DatabaseConnection.getStatement();
+    Connection conn = DatabaseConnection.getConn();
+
+    if (statementChecker(st) == 0 || connChecker(conn) == 0) {
+        return null;
+    }
+
+    try {
+        // Get manager's center ID
+        int centerID = getCenterIDForManager(mid);
+        if (centerID == 0) {
+            return null; // Manager not found
+        }
+
+        // Update parcels' status to 'AT_DESTINATION_CENTER' (if needed)
+        String updateQuery = "UPDATE Parcel " +
+                             "SET status = 'AT_DESTINATION_CENTER' " +
+                             "WHERE status = 'DROPPED_AT_LOCALCENTER' " +
+                             "AND holder = 'CENTER' " +
+                             "AND holder_id = ?";
+        PreparedStatement updatePs = conn.prepareStatement(updateQuery);
+        updatePs.setInt(1, centerID);
+        updatePs.executeUpdate(); // Perform the update
+
+        // Retrieve intracity parcels for the manager's center
+        String selectQuery = "SELECT p.parcel_id, " +
+                             "u1.name AS sender_name, " +
+                             "a1.city AS source_city, " +
+                             "u2.name AS receiver_name, " +
+                             "a2.city AS destination_city, " +
+                             "p.status " +
+                             "FROM Parcel p " +
+                             "JOIN Customer c1 ON p.sender_id = c1.CID " +
+                             "JOIN UserDetails u1 ON c1.CNIC = u1.CNIC " +
+                             "JOIN Route r ON p.route_id = r.route_id " +
+                             "JOIN Address a1 ON r.source_id = a1.id " +
+                             "JOIN Customer c2 ON p.receiver_id = c2.CID " +
+                             "JOIN UserDetails u2 ON c2.CNIC = u2.CNIC " +
+                             "JOIN Address a2 ON r.destination_id = a2.id " +
+                             "WHERE (p.status = 'REQUEST_INITIATED' OR p.status = 'AT_DESTINATION_CENTER') " +
+                             "AND p.holder = 'CENTER' " +
+                             "AND p.holder_id = ?";
+        PreparedStatement ps = conn.prepareStatement(selectQuery);
+        ps.setInt(1, centerID);
+
+        // Execute the query and return the result set
+        return ps.executeQuery();
+    } catch (SQLException e) {
+        System.out.println("Error fetching intracity parcel records for manager: " + e.getMessage());
+        return null;
+    }
+}
+
 	
 	///////////////////////////////////////////now for the assign button/////////////////////////
 	

@@ -89,7 +89,7 @@ public class LoginRegisterController {
        
         int userId = Integer.parseInt(username); // Convert the input to an integer
        if (CustomerOP.verifyLogin(userId,password )) {
-    	   Session.getInstance().setDriverId(userId); 
+    	   Session.getInstance().setUserId(userId); 
             showAlert("Login Successful", "Welcome " + username);
             statusLabel.setText("");
             openUserDashboard();

@@ -2,23 +2,61 @@ package model;
 
 import java.time.LocalDateTime;
 
-//to display in parcel tracking
+public class ParcelTracking {
 
-public class ParcelTracking {   //important for tracking, different events recorded here
-	
-	public ParcelTracking(int i, int j, String string, LocalDateTime minusDays) {
-		// TODO Auto-generated constructor stub
-		this.eventID = i;
-		this.parcelID = j;
-		status = string;
-		
-	}
-	int eventID,parcelID; //eventID just for the primary key
-	String status; //enum is just to get exact names everytime
-	LocalDateTime timestamp;  
-	
-	//just do localdatetime.now() to get the date
+    private int eventID;       // Unique event identifier
+    private int parcelID;      // Parcel ID
+    private String status;     // Status of the parcel (e.g., Delivered, In Transit)
+    private LocalDateTime timestamp;  // Timestamp of the event
+
+    // Constructor
+    public ParcelTracking(int eventID, int parcelID, String status, LocalDateTime timestamp) {
+        this.eventID = eventID;
+        this.parcelID = parcelID;
+        this.status = status;
+        this.timestamp = timestamp;
+    }
+
+    // Getters and Setters
+    public int getEventID() {
+        return eventID;
+    }
+
+    public void setEventID(int eventID) {
+        this.eventID = eventID;
+    }
+
+    public int getParcelID() {
+        return parcelID;
+    }
+
+    public void setParcelID(int parcelID) {
+        this.parcelID = parcelID;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    @Override
+    public String toString() {
+        return "ParcelTracking{" +
+                "eventID=" + eventID +
+                ", parcelID=" + parcelID +
+                ", status='" + status + '\'' +
+                ", timestamp=" + timestamp +
+                '}';
+    }
 }
-
-
-///its just history of what event happened to what parcel at what time

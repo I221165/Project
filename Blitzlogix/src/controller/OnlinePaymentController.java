@@ -29,7 +29,7 @@ public class OnlinePaymentController {
         p.setName("CardPayment");
         p.setBank(bankName);
         p.setTransactionID(trans);
-        
+        p.setWayOfPayment("CardPayment");
         
         p.processPayment();
         statusLabel.setText("Online payment successful!");

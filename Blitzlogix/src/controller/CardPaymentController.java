@@ -30,7 +30,7 @@ public class CardPaymentController {
         p.setName("CardPayment");
         p.setBank(Bank);
         p.setCardNumber(cardNumber);
-        
+        p.setWayOfPayment("CardPayment");
         
         p.processPayment();
         

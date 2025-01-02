@@ -160,7 +160,7 @@ public class PaymentOP {
 
 	    try {
 
-	        String selectQuery = "SELECT payment_id FROM Payments WHERE sender_id = ? AND done = FALSE";
+	        String selectQuery = "SELECT parcel_id FROM Payments WHERE sender_id = ? AND done = FALSE";
 
 	        PreparedStatement ps = conn.prepareStatement(selectQuery);
 

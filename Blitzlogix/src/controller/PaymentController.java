@@ -48,10 +48,10 @@ public class PaymentController {
                 
                 
                 
-                String displayText = "Parcel-" + parcelId;
+             //   String displayText = "Parcel-" + parcelId;
                 
                 // Add the formatted string to ComboBox
-                parcelIdComboBox.getItems().add(displayText);
+                parcelIdComboBox.getItems().add(parcelId);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -68,8 +68,8 @@ public class PaymentController {
         
         
         String selectedParcel = parcelIdComboBox.getValue();
-        String parcelId = selectedParcel.split(" ")[0].replace("Parcel-", ""); 
-        Session.getInstance().setParcelID(Integer.parseInt(parcelId));
+      //  String parcelId = selectedParcel.split(" ")[0].replace("Parcel-", ""); 
+        Session.getInstance().setParcelID(Integer.parseInt(selectedParcel));
 
         // Show payment options
         paymentOptionsBox.setVisible(true);

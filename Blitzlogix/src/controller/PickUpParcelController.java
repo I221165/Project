@@ -1,74 +1,72 @@
 package controller;
 
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-
 import databaseOP.DriverOP;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import model.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class PickUpParcelController {
 
     @FXML
-    private TableView<ObservableList<String>> parcelTable;
-
-    private final ObservableList<ObservableList<String>> parcelList = FXCollections.observableArrayList();
+    private TableView<Parcel> parcelTable;
 
     @FXML
-    private TableColumn<ObservableList<String>, String> parcelIdColumn;
+    private TableColumn<Parcel, Integer> parcelIdColumn;
 
     @FXML
-    private TableColumn<ObservableList<String>, String> statusColumn;
+    private TableColumn<Parcel, String> statusColumn;
 
     @FXML
-    private TableColumn<ObservableList<String>, Button> actionColumn;  // Adding action column
+    private TableColumn<Parcel, Button> actionColumn;
+
+    private final ObservableList<Parcel> parcelList = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
-        // Set up table columns dynamically if necessary (for parcel ID and status)
+        // Initialize table columns
+        parcelIdColumn.setCellValueFactory(new PropertyValueFactory<>("parcelId"));
+        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-        // Assuming that the first two columns are parcel ID and status
-        parcelIdColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().get(0)));
-        statusColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().get(4)));
-
-        // Action column (where the "Pick Up" button will be placed)
-        actionColumn.setCellFactory(column -> new TableCell<ObservableList<String>, Button>() {
+        // Configure action column for "Pick Up" button
+        actionColumn.setCellFactory(column -> new TableCell<>() {
             private final Button pickUpButton = new Button("Pick Up");
 
             {
                 pickUpButton.setOnAction(event -> {
-                    ObservableList<String> parcel = getTableView().getItems().get(getIndex());
-                   
-                   int parcelId = Integer.parseInt(parcel.get(0));
-                    
-                    
-                    DriverOP.pickupParcel(Session.getInstance().getDriverId() , parcelId);
-                    
-                    parcel.set(4, "Picked Up");  // Set the status to "Picked Up"
-                    parcelTable.refresh(); // Refresh table to reflect changes
-                    System.out.println("Parcel " + parcel.get(0) + " marked as picked up.");
+                    Parcel parcel = getTableView().getItems().get(getIndex());
+                    int parcelId = parcel.getParcelId();
+
+                    // Mark parcel as picked up in the database
+                    DriverOP.pickupParcel(Session.getInstance().getDriverId(), parcelId);
+
+                    // Update status in the UI
+                    parcel.setStatus("Picked Up");
+                    parcelTable.refresh();
+                    System.out.println("Parcel " + parcelId + " marked as picked up.");
                 });
             }
 
             @Override
             protected void updateItem(Button item, boolean empty) {
                 super.updateItem(item, empty);
-                ObservableList<String> row = getTableView().getItems().get(getIndex());
-                if (empty || "Picked Up".equals(row.get(4))) {
-                    setGraphic(null);  // Hide button if already picked up
+                if (empty || getIndex() >= getTableView().getItems().size()) {
+                    setGraphic(null);
                 } else {
-                    setGraphic(pickUpButton);
+                    Parcel parcel = getTableView().getItems().get(getIndex());
+                    setGraphic("Picked Up".equals(parcel.getStatus()) ? null : pickUpButton);
                 }
             }
         });
+
+        // Load parcels into the table
+        loadParcels();
     }
 
     @FXML
@@ -77,10 +75,11 @@ public class PickUpParcelController {
             // Fetch parcels from the database
             ResultSet resultSet = DriverOP.getAssignedParcelsForDriver(Session.getInstance().getDriverId());
 
-            // Dynamically populate TableView from ResultSet
-            populateTable(resultSet);
-
-            System.out.println("Parcels loaded into table.");
+            if (resultSet != null) {
+                populateTable(resultSet);
+            } else {
+                System.out.println("No data found.");
+            }
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Failed to load parcels.");
@@ -89,43 +88,22 @@ public class PickUpParcelController {
 
     private void populateTable(ResultSet resultSet) {
         try {
-            // Get ResultSet metadata
-            ResultSetMetaData metaData = resultSet.getMetaData();
-            int columnCount = metaData.getColumnCount();
+            parcelList.clear(); // Clear existing rows
 
-            // Clear existing columns
-            parcelTable.getColumns().clear();
-
-            // Dynamically create columns based on ResultSet metadata
-            for (int i = 1; i <= columnCount; i++) {
-                final int colIndex = i - 1; // 0-based index for column values
-
-                // Create a column for each column in the ResultSet
-                TableColumn<ObservableList<String>, String> column = new TableColumn<>(metaData.getColumnName(i));
-                column.setCellValueFactory(cellData -> 
-                    new javafx.beans.property.SimpleStringProperty(cellData.getValue().get(colIndex))
-                );
-                parcelTable.getColumns().add(column);
-            }
-
-            // Add action column to the table
-            parcelTable.getColumns().add(actionColumn);
-
-            // Populate rows dynamically
-            ObservableList<String> row;
             while (resultSet.next()) {
-                row = FXCollections.observableArrayList();
-                for (int i = 1; i <= columnCount; i++) {
-                    row.add(resultSet.getString(i)); // Add value for each column
-                }
-                parcelList.add(row);
+                int parcelId = resultSet.getInt("parcel_id");
+                String status = resultSet.getString("status");
+
+                // Add new Parcel object to the list
+                parcelList.add(new Parcel(parcelId, status));
             }
 
-            // Set the ObservableList to the TableView
+            // Bind data to the TableView
             parcelTable.setItems(parcelList);
 
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("Failed to populate table.");
         }
     }
 }

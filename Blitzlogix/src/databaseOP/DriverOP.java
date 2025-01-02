@@ -172,22 +172,20 @@ public class DriverOP {
 	    if (statementChecker(st) == 0 || connChecker(conn) == 0) {
 	        return null;
 	    }
-	    
-	    if(isDriverOutForDelivery(driverID) == true) { // out of town maybe
-			  return null;
-		  }
+
+	    if (isDriverOutForDelivery(driverID) == true) { // out of town maybe
+	        return null;
+	    }
 
 	    try {
-	        String selectQuery = "SELECT p.parcel_id, s.city AS source_city, d.city AS destination_city, p.status " +
+	        String selectQuery = "SELECT p.parcel_id, p.status " +
 	                             "FROM Parcel p " +
-	                             "JOIN Route r ON p.route_id = r.route_id " +
-	                             "JOIN Address s ON r.source_id = s.id " +
-	                             "JOIN Address d ON r.destination_id = d.id " +
 	                             "JOIN Driver dr ON p.holder_id = dr.DID " +
 	                             "WHERE dr.DID = ? AND " +
 	                             "(p.status = 'ASSIGNED_TO_DRIVER' OR " +
 	                             "p.status = 'ASSIGNED_TRANSIT' OR " +
 	                             "p.status = 'ASSIGNED_DELIVERY')";
+
 	        PreparedStatement ps = conn.prepareStatement(selectQuery);
 	        ps.setInt(1, driverID);
 	        ResultSet rs = ps.executeQuery();

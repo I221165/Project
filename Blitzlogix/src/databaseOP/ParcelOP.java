@@ -427,66 +427,31 @@ public class ParcelOP {
 	
 	
 	
-	public static ResultSet getTrackingInfoForCustomer(int customerID){
+	public static ResultSet getTrackingInfoForCustomer(int customerID) {
 
 	    Statement st = DatabaseConnection.getStatement();
-
 	    Connection conn = DatabaseConnection.getConn();
 
-
-
 	    if (statementChecker(st) == 0 || connChecker(conn) == 0) {
-
 	        return null;
-
 	    }
-
-
 
 	    try {
-
-	        String selectQuery = "SELECT p.parcel_id, s.name AS sender_name, a1.city AS source_city, " +
-
-	                             "r.name AS receiver_name, a2.city AS destination_city, p.status " +
-
-	                             "FROM Parcel p " +
-
-	                             "JOIN Customer s_cust ON p.sender_id = s_cust.CID " +
-
-	                             "JOIN Customer r_cust ON p.receiver_id = r_cust.CID " +
-
-	                             "JOIN UserDetails s ON s_cust.CNIC = s.CNIC " +
-
-	                             "JOIN UserDetails r ON r_cust.CNIC = r.CNIC " +
-
-	                             "JOIN Address a1 ON (SELECT source_id FROM Route WHERE route_id = p.route_id) = a1.id " +
-
-	                             "JOIN Address a2 ON (SELECT destination_id FROM Route WHERE route_id = p.route_id) = a2.id " +
-
+	        String selectQuery = "SELECT pt.eventID, pt.parcelID, pt.status, pt.timestamp " +
+	                             "FROM ParcelTracking pt " +
+	                             "JOIN Parcel p ON pt.parcelID = p.parcel_id " +
 	                             "WHERE p.sender_id = ? OR p.receiver_id = ?";
 
-
-
 	        PreparedStatement ps = conn.prepareStatement(selectQuery);
-
 	        ps.setInt(1, customerID);
-
 	        ps.setInt(2, customerID);
-
 	        ResultSet rs = ps.executeQuery();
 
-
-
 	        return rs;
-
 	    } catch (SQLException e) {
-
 	        System.out.println("Error fetching tracking info for customer: " + e.getMessage());
-
 	        return null;
-
 	    }
-
 	}
 	
 	
